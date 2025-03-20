@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
 //vamos a crear nuestro propio hook
-const useFecthCharacters =(urlPokemon,urlRick)=>{ //pasamos las API como argumentos al custom hook{
-    const [api, setApi] = useState({ name: "", img: "" });
-
+const useFecthCharacters =(urlPokemon,urlRick)=>{ //pasamos las API como argumentos al custom hook
+    const [name, setName] = useState("");
+    const [img, setImg] = useState("");
 
     useEffect (()=>{
         const fetchApi = async () => {
@@ -19,26 +19,29 @@ const useFecthCharacters =(urlPokemon,urlRick)=>{ //pasamos las API como argumen
                 const response = await fetch(url);
                 const result = await response.json();
         
-                if (url.includes('pokeapi')) {
-                    setApi({ name: result.name, img: result.sprites.front_default });
-                } else if (url.includes('rickandmortyapi')) {
-                    setApi({ name: result.name, img: result.image });
+                if (url.includes("pokeapi")) {
+                    setName(result.name); 
+                    setImg(result.sprites.front_default); 
+                } else if (url.includes("rickandmortyapi")) {
+                    setName(result.name); 
+                    setImg(result.image); 
                 }
-                } catch (err) {
-                console.error("Error fetching data: ", err);
+            } catch (err) {
+                console.error("Error", err);
             }
-            
-        }
+        };
     
-            if (urlPokemon || urlRick) {
-                fetchApi();
-            }
-            }, [urlPokemon, urlRick]);
-        
-            return { api};
+        if (urlPokemon || urlRick) {
+            fetchApi();
+        }
+    }, [urlPokemon, urlRick]);
+
+    return { name, img };
 };
 
 export default useFecthCharacters;
+
+
 
 
 

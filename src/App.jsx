@@ -8,18 +8,18 @@ function App() {
   const urlRick = 'https://rickandmortyapi.com/api/character/1';
 
  //llamamos al hook "useFecthCharacters"
-  const { api: apiPokemon} = useFecthCharacters(urlPokemon, null);
-  const { api: apiRick} = useFecthCharacters(null, urlRick);
+  const { name: namePokemon, img: imgPokemon } = useFecthCharacters(urlPokemon);
+  const { name: nameRick, img: imgRick } = useFecthCharacters(urlRick);
   
   return (
     <>
       <h2>Personaje Pokemon</h2>
-      <p>{apiPokemon.name}</p>
-      <img src={apiPokemon.img} alt="Pokemon" />
+      <p>{namePokemon}</p>
+      <img src={imgPokemon} alt="Pokemon" />
 
       <h2>Personaje Rick and Morty</h2>
-      <p>{apiRick.name}</p>
-      <img src={apiRick.img } alt="Rick"/>
+      <p>{nameRick}</p>
+      <img src={imgRick} alt="Rick"/>
     </>
   );
 }
